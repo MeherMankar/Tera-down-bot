@@ -336,14 +336,16 @@ async def handle_message(client, message: Message):
     except Exception as e:
         logging.error(f"Error handling message: {e}")
         try:
-            # Try worker as fallback
+            # Try your API as fallback
             import requests
-            response = requests.get(f"https://tera.empiregroup.workers.dev/?src={terabox_link}", timeout=10)
+            response = requests.get(f"https://terabox-api-owd3.onrender.com/api/download?url={terabox_link}", timeout=10)
             if response.status_code == 200:
-                buttons = [[InlineKeyboardButton("📥 Download File", url=response.url)]]
-                reply_markup = InlineKeyboardMarkup(buttons)
-                await reply_msg.edit_text("⚡ Direct download link:", reply_markup=reply_markup)
-                return
+                data = response.json()
+                if "download_url" in data:
+                    buttons = [[InlineKeyboardButton("📥 Download File", url=data["download_url"])]]
+                    reply_markup = InlineKeyboardMarkup(buttons)
+                    await reply_msg.edit_text("⚡ Direct download link:", reply_markup=reply_markup)
+                    return
         except:
             pass
         

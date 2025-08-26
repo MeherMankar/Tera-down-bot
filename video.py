@@ -17,8 +17,9 @@ async def download_video(url, reply_msg, user_mention, user_id):
     except Exception as e:
         logging.error(f"Worker failed: {e}")
         
-    # Fallback APIs
+    # Try your custom API first, then fallback APIs
     apis = [
+        f"https://terabox-api-owd3.onrender.com/api/download?url={url}",
         f"https://teraboxvideodownloader.nepcoderdevs.workers.dev/?url={url}",
         f"https://terabox.udayscriptsx.workers.dev/api?url={url}"
     ]
