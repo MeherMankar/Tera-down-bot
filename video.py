@@ -7,21 +7,22 @@ import logging
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 async def download_video(url, reply_msg, user_mention, user_id):
-    # Use your Cloudflare Worker as primary method
-    try:
-        worker_url = f"https://tera.empiregroup.workers.dev/?src={url}"
-        buttons = [[InlineKeyboardButton("📥 Download File", url=worker_url)]]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await reply_msg.edit_text("⚡ Direct download link:", reply_markup=reply_markup)
-        return None, None, None
-    except Exception as e:
-        logging.error(f"Worker failed: {e}")
+    # Commented out Cloudflare Worker
+    # try:
+    #     worker_url = f"https://tera.empiregroup.workers.dev/?src={url}"
+    #     buttons = [[InlineKeyboardButton("📥 Download File", url=worker_url)]]
+    #     reply_markup = InlineKeyboardMarkup(buttons)
+    #     await reply_msg.edit_text("⚡ Direct download link:", reply_markup=reply_markup)
+    #     return None, None, None
+    # except Exception as e:
+    #     logging.error(f"Worker failed: {e}")
+    pass
         
-    # Try your custom API first, then fallback APIs
+    # Use only your custom API
     apis = [
-        f"https://terabox-api-owd3.onrender.com/api/download?url={url}",
-        f"https://teraboxvideodownloader.nepcoderdevs.workers.dev/?url={url}",
-        f"https://terabox.udayscriptsx.workers.dev/api?url={url}"
+        f"https://terabox-api-owd3.onrender.com/api/download?url={url}"
+        # f"https://teraboxvideodownloader.nepcoderdevs.workers.dev/?url={url}",
+        # f"https://terabox.udayscriptsx.workers.dev/api?url={url}"
     ]
     
     for api_url in apis:
