@@ -364,6 +364,13 @@ async def handle_message(client, message: Message):
 
 if __name__ == "__main__":
     try:
+        # Delete session file if it exists to force re-authentication
+        import os
+        session_file = "my_bot.session"
+        if os.path.exists(session_file):
+            os.remove(session_file)
+            logging.info("Removed old session file")
+        
         keep_alive()
         logging.info("Starting Terabox bot...")
         app.run()
