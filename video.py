@@ -1,5 +1,4 @@
 import requests
-import aria2p
 from datetime import datetime
 from status import format_progress_bar
 import asyncio
@@ -7,26 +6,8 @@ import os, time
 import logging
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-# Try to initialize aria2, but handle connection errors gracefully
+# aria2 not available in cloud deployment
 aria2 = None
-try:
-    aria2 = aria2p.API(
-        aria2p.Client(
-            host="http://localhost",
-            port=6800,
-            secret=""
-        )
-    )
-    options = {
-        "max-tries": "50",
-        "retry-wait": "3",
-        "continue": "true"
-    }
-    aria2.set_global_options(options)
-    logging.info("aria2c daemon connected successfully")
-except Exception as e:
-    logging.warning(f"aria2c daemon not available: {e}")
-    aria2 = None
 
 
 async def download_video(url, reply_msg, user_mention, user_id):
