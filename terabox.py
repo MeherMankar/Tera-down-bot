@@ -346,8 +346,23 @@ async def handle_message(client, message: Message):
                     reply_markup = InlineKeyboardMarkup(buttons)
                     await reply_msg.edit_text("⚡ Direct download link:", reply_markup=reply_markup)
                     return
-        except:
-            pass
+            # Try nepcoderdevs as backup
+            response = requests.get(f"https://teraboxvideodownloader.nepcoderdevs.workers.dev/?url={terabox_link}", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                if "response" in data and len(data["response"]) > 0:
+                    resolutions = data["response"][0]["resolutions"]
+                    fast_link = resolutions["Fast Download"]
+                    hd_link = resolutions["HD Video"]
+                    buttons = [
+                        [InlineKeyboardButton("🚀 HD Video", url=hd_link)],
+                        [InlineKeyboardButton("⚡ Fast Download", url=fast_link)]
+                    ]
+                    reply_markup = InlineKeyboardMarkup(buttons)
+                    await reply_msg.edit_text("📥 Download links:", reply_markup=reply_markup)
+                    return
+        except Exception as e:
+            logging.error(f"Fallback API failed: {e}")
         
         error_msg = "❌ All download methods failed. APIs are currently down."
         try:
