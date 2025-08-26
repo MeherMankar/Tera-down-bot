@@ -1,0 +1,6 @@
+@echo off
+echo Starting aria2c daemon...
+start /B aria2c --enable-rpc --rpc-listen-all=false --rpc-allow-origin-all --daemon --quiet
+timeout /t 2 /nobreak >nul
+echo Starting Terabox bot...
+python terabox.py
