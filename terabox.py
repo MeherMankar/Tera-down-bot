@@ -13,7 +13,7 @@ from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 from os import environ
 import time
 from status import format_progress_bar  # Assuming this is a custom module
-from video import download_video, upload_video  # Assuming these are custom modules
+from video_new import download_video, upload_video  # Assuming these are custom modules
 from database.database import present_user, add_user, full_userbase, del_user, db_verify_status, db_update_verify_status  # Assuming these are custom modules
 from shortzy import Shortzy  # Assuming this is a custom module
 from pymongo.errors import DuplicateKeyError
