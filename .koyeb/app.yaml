@@ -1,0 +1,36 @@
+name: terabox-bot
+services:
+  - name: terabox-bot
+    git:
+      branch: main
+      build_command: pip install -r requirements.txt
+      run_command: python terabox.py
+    instance_type: nano
+    regions:
+      - fra
+    ports:
+      - port: 5000
+        protocol: http
+    env:
+      - key: BOT_TOKEN
+        value: "8246935117:AAHvbAj83CMYWQvniaMxL_tIpzq7ajjuCjg"
+      - key: TELEGRAM_API
+        value: "25401847"
+      - key: TELEGRAM_HASH
+        value: "ca8a79df8704ed676fca6891b7bc08ce"
+      - key: FSUB_ID
+        value: "-1002231787083"
+      - key: DUMP_CHAT_ID
+        value: "-1002231787083"
+      - key: MONGO_URL
+        value: "mongodb+srv://hegodal811:rsRu17pspZAcp6V7@cluster0.prsvqax.mongodb.net/?retryWrites=true&w=majority"
+      - key: ADMINS
+        value: "6121637257"
+      - key: SHORTLINK_URL
+        value: "ziplinker.net"
+      - key: SHORTLINK_API
+        value: "4b884da539a2f5d579e2a6f805e623c7a082a3b1"
+      - key: VERIFY_EXPIRE
+        value: "43200"
+      - key: IS_VERIFY
+        value: "False"

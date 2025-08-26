@@ -1,11 +1,11 @@
 [phases.setup]
-nixPkgs = ['python3', 'aria2']
+nixPkgs = ['python311']
 
 [phases.install]
 cmds = ['pip install -r requirements.txt']
 
 [phases.build]
-cmds = ['echo "Build complete"']
+cmds = ['echo "Build completed"']
 
 [start]
 cmd = 'python terabox.py'
