@@ -355,16 +355,10 @@ async def handle_message(client, message: Message):
 
 
 if __name__ == "__main__":
-    # Start aria2c daemon for Railway
-    import subprocess
-    import os
-    
     try:
-        subprocess.Popen(['aria2c', '--enable-rpc', '--rpc-listen-all=false', '--rpc-allow-origin-all', '--daemon', '--quiet'])
-        logging.info("aria2c daemon started")
-    except:
-        logging.warning("Could not start aria2c daemon")
-    
-    keep_alive()
-    logging.info("Starting Terabox bot...")
-    app.run()
+        keep_alive()
+        logging.info("Starting Terabox bot...")
+        app.run()
+    except Exception as e:
+        logging.error(f"Bot failed to start: {e}")
+        exit(1)
